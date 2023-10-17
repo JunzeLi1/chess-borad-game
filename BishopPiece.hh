@@ -1,3 +1,4 @@
+/*BishopPiece.hh*/
 #ifndef __BISHOPPIECE_H__
 #define __BISHOPPIECE_H__
 
@@ -11,6 +12,14 @@ namespace Student
 {
     class BishopPiece : public ChessPiece
     {
+        public:
+            BishopPiece(ChessBoard &board, Color color, int row, int column);
+            
+            Type getType() override;
+
+            bool canMoveToLocation(int toRow, int toColumn) override;
+
+            const char *toString() override;
     };
 }
 

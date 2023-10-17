@@ -1,3 +1,4 @@
+/*ChessBoard.cc*/
 #include "ChessBoard.hh"
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
@@ -45,4 +46,14 @@ std::ostringstream ChessBoard::displayBoard()
                  << std::endl;
 
     return outputString;
+}
+
+
+bool ChessBoard::isOpponentPieceAt(int row, int column, Color curr_color){
+    ChessPiece* Piece = getPiece(row, column);
+    if(Piece && Piece->getColor() != curr_color){
+        return true;
+    }
+
+    return false;
 }

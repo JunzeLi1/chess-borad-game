@@ -1,3 +1,4 @@
+/*ChessBoard.hh*/
 #ifndef _CHESSBOARD_H__
 #define _CHESSBOARD_H__
 
@@ -129,6 +130,8 @@ namespace Student
          * An output stream containing the full board layout.
          */
         std::ostringstream displayBoard();
+
+        bool isOpponentPieceAt(int row, int column, Color curr_color);
     };
 }
 

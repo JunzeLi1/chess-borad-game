@@ -1,3 +1,4 @@
+/*Chess.h*/
 #ifndef __CHESS_H__
 #define __CHESS_H__
 

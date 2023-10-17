@@ -1,3 +1,4 @@
+/*KingPiece.hh*/
 #ifndef __KINGPIECE_H__
 #define __KINGPIECE_H__
 

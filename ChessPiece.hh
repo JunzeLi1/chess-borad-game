@@ -1,14 +1,22 @@
+/*ChessPiece.hh*/
 #ifndef _CHESSPIECE_H__
 #define _CHESSPIECE_H__
 
 #include "Chess.h"
+#include "ChessBoard.hh"
 
-    namespace Student
+namespace Student
 {
   class ChessBoard;
 
   class ChessPiece
   {
+  private:
+    ChessBoard & _board;
+    Color _color;
+    int _row;
+    int _column;
+    Type _type;
   public:
     /**
      * @brief
@@ -44,7 +52,7 @@
      * would have been to define this function as pure virtual and
      * let each derived class override this function.
      */
-    Type getType();
+    virtual Type getType();
 
     /**
      * @return
@@ -57,6 +65,8 @@
      * Current column number of piece.
      */
     int getColumn();
+
+    ChessBoard& getBoard() const;
 
     /**
      * @brief Sets row and column numbers of piece.
