@@ -17,6 +17,14 @@ using Student::ChessBoard;
 ChessBoard::ChessBoard(int numRow, int numCol) 
     : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece *>(numCol, nullptr)) {}
 
+ChessBoard::~ChessBoard() {
+    for (auto &row : board) {
+        for (auto &piece : row) {
+            delete piece;
+            piece = nullptr;
+        }
+    }
+}
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn){
     if (board.at(startRow).at(startColumn) != nullptr) {
@@ -111,6 +119,14 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     }
 
     return curr_piece->canMoveToLocation(toRow, toColumn);
+}
+
+bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn){
+    return true;
+}
+
+bool ChessBoard::isPieceUnderThreat(int row, int column){
+    return true;
 }
 
 std::ostringstream ChessBoard::displayBoard()

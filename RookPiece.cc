@@ -25,7 +25,7 @@ namespace Student
     }
 
     const char *RookPiece::toString(){
-        return (getColor() == White) ? "♖" : "♜";
+        return (getColor() == White) ? "\u2656" : "\u265C";
     }
 
 }

@@ -22,6 +22,6 @@ namespace Student
     }
 
     const char *BishopPiece::toString(){
-        return (getColor() == White) ? "♗" : "♝";
+        return (getColor() == White) ? "\u2657" : "\u265d";
     }   
 }

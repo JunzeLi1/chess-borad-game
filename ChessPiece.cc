@@ -27,4 +27,8 @@ namespace Student
         _row = row;
         _column = column;
     }
+
+    Type ChessPiece::getType() {
+    return _type;
+}
 }

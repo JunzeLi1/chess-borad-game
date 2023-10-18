@@ -45,6 +45,6 @@ namespace Student
     }
 
     const char *PawnPiece::toString() {
-        return (getColor() == White) ? "♙" : "♟︎";
+        return (getColor() == White) ? "\u2659" : "\u265F";
     }
 }
