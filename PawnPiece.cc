@@ -24,13 +24,14 @@ namespace Student
             }
         }
         if(getColor() == White){
-            if(column_moved == 0 && (row_moved == -2 || row_moved == -1) && getRow() == board_rows - 2){
-                return true;
-            }
             if (row_moved == -1 && column_moved == 0){
                 return true;
             }
+            if(column_moved == 0 && (row_moved == -2 || row_moved == -1) && getRow() == board_rows - 2){
+                return true;
+            }
         }
+
 
         if(getColor() == Black){
             if(column_moved == 0 && (row_moved == 2 || row_moved == 1) && getRow() == 1){
