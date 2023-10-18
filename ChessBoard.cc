@@ -7,12 +7,16 @@
 
 using Student::ChessBoard;
 
-ChessBoard::ChessBoard(int numRow, int numCol){
+/*ChessBoard::ChessBoard(int numRow, int numCol){
     numRows = numRow;
     numCols = numCol;
     std::vector<std::vector<ChessPiece *>> board(numRow, 
                 std::vector<ChessPiece *>(numCol, nullptr));
-}
+}*/
+
+ChessBoard::ChessBoard(int numRow, int numCol) 
+    : numRows(numRow), numCols(numCol), board(numRow, std::vector<ChessPiece *>(numCol, nullptr)) {}
+
 
 void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn){
     if (board.at(startRow).at(startColumn) != nullptr) {

@@ -6,7 +6,6 @@ namespace Student
     ChessPiece::ChessPiece(ChessBoard &board, Color color, int row, int column)
         : _board(board), _color(color), _row(row), _column(column) {}
 
-    ChessPiece::~ChessPiece() {}
 
     Color ChessPiece::getColor() {
         return _color;

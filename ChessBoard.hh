@@ -3,10 +3,12 @@
 #define _CHESSBOARD_H__
 
 #include "ChessPiece.hh"
-#include "KingPiece.hh"
+//#include "KingPiece.hh"
 #include <list>
 #include <vector>
 #include <sstream>
+
+class ChessPiece;
 
 namespace Student
 {
