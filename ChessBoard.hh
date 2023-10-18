@@ -132,6 +132,10 @@ namespace Student
         std::ostringstream displayBoard();
 
         bool isOpponentPieceAt(int row, int column, Color curr_color);
+
+        void switchTurn();
+
+        bool isPathClear(int fromRow, int fromColumn, int toRow, int toColumn);
     };
 }
 
