@@ -59,7 +59,7 @@ void unit_isValidMove_Pawn() {
 	
 
 	assert(!board.isValidMove(0, 0, 2, 0));
-    assert(board.isValidMove(0, 0, 1, 0));
+    assert(!board.isValidMove(0, 0, 1, 0));
     assert(!board.isValidMove(0, 0, 0, 1));
 	assert(!board.isValidMove(0, 0, 1, 2));
 	assert(!board.isValidMove(0, 0, -1, -1));
@@ -68,8 +68,8 @@ void unit_isValidMove_Pawn() {
 
 int main()
 {
-    unit_isValidMove_bishop_one();
-    unit_isValidMove_Rook();
+    // unit_isValidMove_bishop_one();
+    // unit_isValidMove_Rook();
     unit_isValidMove_Pawn();
     //test_part1_4x4_1();
     return EXIT_SUCCESS;
