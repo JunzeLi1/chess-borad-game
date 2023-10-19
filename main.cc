@@ -151,7 +151,7 @@ void overwrite_test() {
     board.createChessPiece(Black, Rook, 2, 2);
     board.createChessPiece(Black, Pawn, 2, 4);
     board.createChessPiece(White, Pawn, 2, 4);  // Placing a piece in the path of the rook
-    std::cout << board.displayBoard().str() << std::endl;
+    //std::cout << board.displayBoard().str() << std::endl;
     assert(!board.isValidMove(2, 2, 2, 5));  // Invalid move due to obstruction
 }
 
@@ -176,7 +176,7 @@ void unit_isValidScan_Comprehensive() {
     board.createChessPiece(Black, Bishop, 6, 1);
     board.createChessPiece(Black, Rook, 7, 0);
 
-    std::cout << board.displayBoard().str() << std::endl;
+    //std::cout << board.displayBoard().str() << std::endl;
 
     // Testing moves for Black Bishop at (2, 7)
     assert(board.isValidMove(2, 7, 0, 5));  // Blocked by White Pawn
@@ -232,6 +232,152 @@ void test_part1_4x4_1() {
     return;
 }
 
+void test_part1_4x4_3() {
+    // Corresponding code
+    Student::ChessBoard sBoard(4, 4);
+    
+    // Setting up the board based on the configuration
+    sBoard.createChessPiece(White, Bishop, 2, 2);
+    sBoard.createChessPiece(White, Rook, 1, 0);
+    sBoard.createChessPiece(Black, Pawn, 1, 1);
+    sBoard.createChessPiece(Black, Pawn, 0, 1);
+
+   // std::cout << sBoard.displayBoard().str() << std::endl;
+
+    // Calls isValidMove() from every position to
+    // every other position on the chess board for
+    // all pieces and checks the results.
+    for (int fromRow = 0; fromRow < 4; ++fromRow) {
+        for (int fromCol = 0; fromCol < 4; ++fromCol) {
+            for (int toRow = 0; toRow < 4; ++toRow) {
+                for (int toCol = 0; toCol < 4; ++toCol) {
+                    bool result = sBoard.isValidMove(fromRow, fromCol, toRow, toCol);
+                    
+                    // Here, you can add assertions or checks based on your expectations.
+                    // For example:
+                    // if (fromRow == 0 && fromCol == 1 && toRow == 1 && toCol == 1) {
+                    //     assert(result == true); // Expecting the move to be valid for the White Rook
+                    // }
+                    // if (fromRow == 1 && fromCol == 1 && toRow == 0 && toCol == 1) {
+                    //     assert(result == true); // Expecting the move to be valid for the White Rook
+                    // }
+                    // if (fromRow == 0 && fromCol == 1 && toRow == 2 && toCol == 1) {
+                    //     assert(result == false); // Expecting the move to be valid for the White Rook
+                    // }
+                    // if (fromRow == 1 && fromCol == 1 && toRow == 2 && toCol == 1) {
+                    //     assert(result == false); // Expecting the move to be valid for the White Rook
+                    // }
+                    if (fromRow == 2 && fromCol == 2 && toRow == 1 && toCol == 1) {
+                        assert(result == true); // Expecting the move to be valid for the White Rook
+                    }
+                    // ... Add more assertions based on other scenarios and expectations.
+                }
+            }
+        }
+    }
+
+    return;
+}
+
+void test_part1_8x8_12() {
+    // Corresponding code
+    Student::ChessBoard sBoard(8, 8);
+
+    sBoard.createChessPiece(White, Rook, 5, 7);
+    sBoard.createChessPiece(Black, Pawn, 1, 1);
+    sBoard.createChessPiece(White, Pawn, 2, 3);
+    sBoard.createChessPiece(Black, Pawn, 0, 7);
+    sBoard.createChessPiece(Black, Bishop, 7, 3);
+    sBoard.createChessPiece(Black, Bishop, 4, 3);
+    sBoard.createChessPiece(Black, Rook, 4, 3);
+    sBoard.createChessPiece(White, Pawn, 6, 3);
+
+    std::cout << sBoard.displayBoard().str() << std::endl;    
+
+    assert(sBoard.isValidMove(1, 1, 2, 1) == true);
+    assert(sBoard.isValidMove(1, 1, 0, 1) == false);
+    assert(sBoard.isValidMove(1, 1, 2, 2) == false);
+    assert(sBoard.isValidMove(1, 1, 1, 1) == false);
+    assert(sBoard.isValidMove(1, 1, -1, 1) == false);
+
+    assert(sBoard.isValidMove(4, 3, 3, 3) == true);
+    assert(sBoard.isValidMove(4, 3, 2, 3) == true);
+    assert(sBoard.isValidMove(4, 3, 6, 3) == true);
+    assert(sBoard.isValidMove(4, 3, 4, 7) == false);
+    assert(sBoard.isValidMove(4, 3, 4, 8) == false);
+    // Setting up the board based on the configuration
+    // sBoard.createChessPiece(White, Rook, 2, 0);
+    // sBoard.createChessPiece(Black, Pawn, 6, 2);
+    // sBoard.createChessPiece(Black, Bishop, 6, 3);
+    // sBoard.createChessPiece(Black, Rook, 1, 1);
+    // sBoard.createChessPiece(White, Rook, 4, 3);
+    // sBoard.createChessPiece(White, Bishop, 4, 7);
+    // sBoard.createChessPiece(Black, Pawn, 4, 1);
+    // sBoard.createChessPiece(Black, Pawn, 4, 5);
+    // sBoard.createChessPiece(White, Pawn, 6, 5);
+    // sBoard.createChessPiece(White, Pawn, 7, 0);
+    // sBoard.createChessPiece(White, Pawn, 3, 5);
+    // sBoard.createChessPiece(Black, Rook, 7, 3);
+    // sBoard.createChessPiece(White, Rook, 6, 6);
+    // sBoard.createChessPiece(White, Rook, 5, 4);
+    // sBoard.createChessPiece(White, Rook, 5, 3);
+    // sBoard.createChessPiece(Black, Bishop, 1, 5);
+
+    // std::cout << sBoard.displayBoard().str() << std::endl;
+
+    // for (int fromRow = 0; fromRow < 8; ++fromRow) {
+    //     for (int fromCol = 0; fromCol < 8; ++fromCol) {
+    //         for (int toRow = 0; toRow < 8; ++toRow) {
+    //             for (int toCol = 0; toCol < 8; ++toCol) {
+    //                 bool result = sBoard.isValidMove(fromRow, fromCol, toRow, toCol);
+                    
+    //                 // Here, you can add assertions or checks based on your expectations.
+    //                 // For example:
+    //                 if (fromRow == 2 && fromCol == 0 && toRow == 3 && toCol == 0) {
+    //                     assert(result == true); // Expecting the move to be valid for the White Rook at (2,0)
+    //                 }
+    //                 // ... Add more assertions based on other scenarios and expectations.
+    //             }
+    //         }
+    //     }
+    // }
+
+    // assert(sBoard.isValidMove(1, 1, 2, 1) == true);
+    // assert(sBoard.isValidMove(1, 1, 3, 1) == true); // Beyond board boundary
+
+    // // Black pawn at (4,1) can move only 1 step forward along the same column
+    // assert(sBoard.isValidMove(4, 1, 5, 1) == true);
+    // assert(sBoard.isValidMove(4, 1, 6, 1) == false);
+
+    // // Black pawn at (4,5) can consume the white pawn at (5,4) by moving diagonally
+    // assert(sBoard.isValidMove(4, 5, 5, 4) == true);
+
+    // // White pawn at (6,5) can move only 1 step backward along the same column
+    // assert(sBoard.isValidMove(6, 5, 5, 5) == true);
+    // assert(sBoard.isValidMove(6, 5, 4, 5) == true);
+
+    // // White pawn at (7,0) can move 1 or 2 steps backward along the same column
+    // assert(sBoard.isValidMove(7, 0, 6, 0) == true);
+    // assert(sBoard.isValidMove(7, 0, 5, 0) == false);
+
+    // // White pawn at (3,5) can consume the black pawn at (2,4) by moving diagonally
+    // assert(sBoard.isValidMove(3, 5, 2, 4) == false);
+
+    // assert(sBoard.isValidMove(6, 2, 6, 2) == false); // Black pawn trying to move to its own position
+
+    // // The piece should not move out of bounds
+    // assert(sBoard.isValidMove(6, 2, 8, 2) == false); // Black pawn trying to move beyond board boundary
+    // assert(sBoard.isValidMove(7, 0, 8, 0) == false); // White pawn trying to move beyond board boundary
+
+    // // The piece should not be obstructed by another piece between its initial and final position
+    // assert(sBoard.isValidMove(2, 0, 5, 0) == true); // White rook at (2,0) obstructed by another white rook at (4,3)
+    // assert(sBoard.isValidMove(4, 3, 1, 3) == true); // White rook at (4,3) obstructed by black rook at (1,1)
+
+    // // The final position should not contain another piece of the same color
+    // assert(sBoard.isValidMove(2, 0, 4, 3) == false); // White rook at (2,0) trying to move to position of another white rook at (4,3)
+    // assert(sBoard.isValidMove(6, 2, 6, 3) == false); // Black pawn at (6,2) trying to move to position of black bishop at (6,3)
+
+}
 
 int main()
 {
@@ -248,5 +394,7 @@ int main()
     overwrite_test();
     unit_isValidScan_Comprehensive();
     test_part1_4x4_1();
+    test_part1_4x4_3();
+    test_part1_8x8_12();
     return EXIT_SUCCESS;
 }

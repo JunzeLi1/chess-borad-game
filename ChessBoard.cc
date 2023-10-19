@@ -81,12 +81,18 @@ bool ChessBoard::isPathClear(int fromRow, int fromColumn, int toRow, int toColum
     int iter = std::max(std::abs(row_path), std::abs(col_path));
 
     for(int i = 1; i < iter; i++){
-        fromRow += row_dir;
-        fromColumn += col_dir;
-        if(getPiece(fromRow, fromColumn) != nullptr){
-            return false;
-        }
+    fromRow += row_dir;
+    fromColumn += col_dir;
+    
+    if (fromRow < 0 || fromRow >= numRows || fromColumn < 0 || fromColumn >= numCols) {
+        return false;  // Path is not clear if it goes out of bounds
     }
+
+    if(getPiece(fromRow, fromColumn) != nullptr){
+        return false;
+    }
+}
+
 
     return true;
 }
