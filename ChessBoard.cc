@@ -58,6 +58,7 @@ void ChessBoard::switchTurn() {
     }
 }
 
+
 bool ChessBoard::isPathClear(int fromRow, int fromColumn, int toRow, int toColumn){
     int row_path = toRow - fromRow;
     int col_path = toColumn - fromColumn;
