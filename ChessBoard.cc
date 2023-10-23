@@ -104,9 +104,9 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         return false;
     }
 
-    // if(curr_piece->getColor() != turn){
-    //     return false;
-    // }
+    if(curr_piece->getColor() != turn){
+        return false;
+    }
 
     if(fromColumn == toColumn && fromRow == toRow){
         return false;
@@ -129,6 +129,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn){
+
     return true;
 }
 
