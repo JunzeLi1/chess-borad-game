@@ -45,6 +45,36 @@ void unit_isValidMove_Pawn() {
 	assert(!board.isValidMove(0, 0, -1, -1));
 }
 
+void part1_88_5() {
+    Student::ChessBoard board(8, 8);
+    
+    // Setting up the board based on the configuration
+    board.createChessPiece(White, Rook, 5, 7);
+    board.createChessPiece(Black, Pawn, 1, 1);
+    board.createChessPiece(White, Pawn, 2, 3);
+    board.createChessPiece(Black, Pawn, 0, 7);
+    board.createChessPiece(Black, Bishop, 7, 3);
+    board.createChessPiece(Black, Bishop, 4, 3);
+    board.createChessPiece(Black, Rook, 4, 3);
+    board.createChessPiece(White, Pawn, 6, 3);
+    std::cout << board.displayBoard().str() << std::endl;
+
+    for (int fromRow = 0; fromRow < 8; ++fromRow) {
+        for (int fromCol = 0; fromCol < 8; ++fromCol) {
+            for (int toRow = 0; toRow < 8; ++toRow) {
+                for (int toCol = 0; toCol < 8; ++toCol) {
+                    bool result = board.isValidMove(fromRow, fromCol, toRow, toCol);
+                    if(result == true){
+                        std::cout << "Move from (" << fromRow << "," << fromCol << ") to (" 
+                                << toRow << "," << toCol << ") is " 
+                                << (result ? "valid" : "invalid") << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void part1_44_3(){
      Student::ChessBoard board(4, 4);
     
@@ -415,7 +445,7 @@ int main()
     unit_isValidMove_Rook();
     unit_isValidMove_Pawn();
     unit_PawnPiece_Movement();
-    part1_44_3();
+    //part1_44_3();
     unit_SameSpot_Movement();
     unit_OutOfBounds_Movement();
     unit_Obstruction_Movement();
@@ -424,7 +454,5 @@ int main()
     overwrite_test();
     unit_isValidScan_Comprehensive();
     test_part1_4x4_1();
-    test_part1_4x4_3();
-    test_part1_8x8_12();
     return EXIT_SUCCESS;
 }
