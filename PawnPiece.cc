@@ -24,20 +24,24 @@ namespace Student
             }
         }
         if(getColor() == White){
-            if (row_moved == -1 && column_moved == 0){
+            if (row_moved == -1 && column_moved == 0
+                && getBoard().getPiece(toRow, toColumn) == nullptr){
                 return true;
             }
-            if(column_moved == 0 && (row_moved == -2 || row_moved == -1) && getRow() == board_rows - 2){
+            if(column_moved == 0 && (row_moved == -2 || row_moved == -1) && getRow() == board_rows - 2
+                && getBoard().getPiece(toRow, toColumn) == nullptr){
                 return true;
             }
         }
 
 
         if(getColor() == Black){
-            if(column_moved == 0 && (row_moved == 2 || row_moved == 1) && getRow() == 1){
+            if(column_moved == 0 && (row_moved == 2 || row_moved == 1) && getRow() == 1
+                && getBoard().getPiece(toRow, toColumn) == nullptr){
                 return true;
             }
-            if (row_moved == 1 && column_moved == 0){
+            if (row_moved == 1 && column_moved == 0
+                && getBoard().getPiece(toRow, toColumn) == nullptr){
                 return true;
             }
         }
