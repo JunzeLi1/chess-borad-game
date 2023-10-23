@@ -104,10 +104,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         return false;
     }
 
-    if(curr_piece->getColor() != turn){
-        return false;
-    }
-
     if(fromColumn == toColumn && fromRow == toRow){
         return false;
     }
@@ -129,12 +125,34 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn){
-
-    return true;
+    ChessPiece* curr_piece = getPiece(fromRow, fromColumn);
+    if(isValidMove(fromRow, fromColumn, toRow, toColumn)){
+        if(curr_piece->getColor() == turn){
+            Color curr_color = curr_piece->getColor();
+            Type curr_type = curr_piece->getType();
+            createChessPiece(curr_color, curr_type, toRow, toColumn);
+            delete board.at(fromRow).at(fromColumn);
+            board.at(fromRow).at(fromColumn) = nullptr;
+            switchTurn();
+            return true;
+        }
+    }
+    return false;
 }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column){
-    return true;
+    ChessPiece *curr_piece = getPiece(row, column);
+    if(curr_piece){
+        for(int r = 0; r < getNumRows(); r++){
+            for(int c = 0; c < getNumCols(); c++){
+                if(isValidMove(r, c, row, column)){
+                    return true;
+                }
+            }
+        }
+
+    }
+    return false;
 }
 
 std::ostringstream ChessBoard::displayBoard()

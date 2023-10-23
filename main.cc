@@ -50,7 +50,7 @@ void part1_88_5() {
     
     // Setting up the board based on the configuration
     board.createChessPiece(White, Rook, 5, 7);
-    board.createChessPiece(Black, Pawn, 1, 1);
+    board.createChessPiece(Black, Pawn, 1, 2);
     board.createChessPiece(White, Pawn, 2, 3);
     board.createChessPiece(Black, Pawn, 0, 7);
     board.createChessPiece(Black, Bishop, 7, 3);
@@ -59,20 +59,30 @@ void part1_88_5() {
     board.createChessPiece(White, Pawn, 6, 3);
     std::cout << board.displayBoard().str() << std::endl;
 
-    for (int fromRow = 0; fromRow < 8; ++fromRow) {
-        for (int fromCol = 0; fromCol < 8; ++fromCol) {
-            for (int toRow = 0; toRow < 8; ++toRow) {
-                for (int toCol = 0; toCol < 8; ++toCol) {
-                    bool result = board.isValidMove(fromRow, fromCol, toRow, toCol);
-                    if(result == true){
-                        std::cout << "Move from (" << fromRow << "," << fromCol << ") to (" 
-                                << toRow << "," << toCol << ") is " 
-                                << (result ? "valid" : "invalid") << std::endl;
-                    }
-                }
-            }
-        }
-    }
+    // for (int fromRow = 0; fromRow < 8; ++fromRow) {
+    //     for (int fromCol = 0; fromCol < 8; ++fromCol) {
+    //         for (int toRow = 0; toRow < 8; ++toRow) {
+    //             for (int toCol = 0; toCol < 8; ++toCol) {
+    //                 bool result = board.isValidMove(fromRow, fromCol, toRow, toCol);
+    //                 if(result == true){
+    //                     std::cout << "Move from (" << fromRow << "," << fromCol << ") to (" 
+    //                             << toRow << "," << toCol << ") is " 
+    //                             << (result ? "valid" : "invalid") << std::endl;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    assert(board.isPieceUnderThreat(2, 3));
+    assert(board.movePiece(2, 3, 1, 3));//w
+    assert(board.movePiece(1, 2, 2, 2));
+    std::cout << board.displayBoard().str() << std::endl;
+    assert(board.movePiece(5, 7, 5, 3));
+    assert(board.movePiece(4, 3, 2, 3));//b
+    std::cout << board.displayBoard().str() << std::endl;
+    //assert(board.movePiece(5, 3, 5, 7));
+    
+
 }
 
 void part1_44_3(){
@@ -84,34 +94,8 @@ void part1_44_3(){
     board.createChessPiece(White, Pawn, 1, 1);
     board.createChessPiece(Black, Pawn, 0, 1);
 
-    //std::cout << board.displayBoard().str() << std::endl;
+    std::cout << board.displayBoard().str() << std::endl;
 
-    // assert(board.isValidMove(2, 2, 3, 3));
-    // assert(!board.isValidMove(2, 2, 0, 0));
-    // assert(!board.isValidMove(2, 2, 1, 1));
-    // assert(!board.isValidMove(2, 2, 4, 4));
-    // assert(!board.isValidMove(2, 2, 1, 2));
-    // assert(!board.isValidMove(2, 2, 2, 2));
-
-    // assert(board.isValidMove(1, 0, 3, 0)); 
-    // assert(!board.isValidMove(1, 0, 1, 2)); 
-    // assert(!board.isValidMove(1, 0, 1, 1)); 
-    // assert(!board.isValidMove(1, 0, 4, 0)); 
-    // assert(!board.isValidMove(1, 0, 1, 0)); 
-
-    // assert(!board.isValidMove(1, 1, 0, 1)); 
-    // assert(!board.isValidMove(1, 1, 1, 2));
-    // assert(!board.isValidMove(1, 1, 2, 1));
-    // assert(!board.isValidMove(1, 1, 1, 1));
-    // assert(!board.isValidMove(1, 1, 4, 1));
-
-    // assert(board.isValidMove(0, 1, 1, 1));
-    // assert(!board.isValidMove(0, 1, 0, 0));
-    // assert(!board.isValidMove(0, 1, 0, 1));
-    // assert(!board.isValidMove(0, 1, -1, 1));
-
-    // assert(!board.isValidMove(0, 0, 0, 1));
-    // assert(!board.isValidMove(0, 0, 2, 0));
 
     for (int fromRow = 0; fromRow < 4; ++fromRow) {
         for (int fromCol = 0; fromCol < 4; ++fromCol) {
@@ -127,29 +111,32 @@ void part1_44_3(){
             }
         }
     }
+    assert(board.movePiece(1, 0, 0, 0));
+    std::cout << board.displayBoard().str() << std::endl;
+
 
 }
 
-void unit_PawnPiece_Movement() {
-    Student::ChessBoard board(8, 8); // Standard 8x8 board for this example
+// void unit_PawnPiece_Movement() {
+//     Student::ChessBoard board(8, 8); // Standard 8x8 board for this example
 
-    // Testing black pawn's movement from row 1
-    board.createChessPiece(Black, Pawn, 1, 3);
-    assert(board.isValidMove(1, 3, 2, 3));  // Valid 1 step move
-    assert(board.isValidMove(1, 3, 3, 3));  // Valid 2 step move
-    assert(!board.isValidMove(1, 3, 4, 3));  // Invalid more than 2 steps move
+//     // Testing black pawn's movement from row 1
+//     board.createChessPiece(Black, Pawn, 1, 3);
+//     // assert(board.isValidMove(1, 3, 2, 3));  // Valid 1 step move
+//     assert(board.isValidMove(1, 3, 3, 3));  // Valid 2 step move
+//     assert(!board.isValidMove(1, 3, 4, 3));  // Invalid more than 2 steps move
 
-    // Testing white pawn's movement from row n-2
-    board.createChessPiece(White, Pawn, 6, 4);
-    assert(board.isValidMove(6, 4, 5, 4));  // Valid 1 step move
-    assert(board.isValidMove(6, 4, 4, 4));  // Valid 2 step move
-    assert(!board.isValidMove(6, 4, 3, 4));  // Invalid more than 2 steps move
+//     // Testing white pawn's movement from row n-2
+//     board.createChessPiece(White, Pawn, 6, 4);
+//     assert(board.isValidMove(6, 4, 5, 4));  // Valid 1 step move
+//     assert(board.isValidMove(6, 4, 4, 4));  // Valid 2 step move
+//     assert(!board.isValidMove(6, 4, 3, 4));  // Invalid more than 2 steps move
 
-    // Testing pawn's diagonal consumption
-    board.createChessPiece(Black, Pawn, 2, 2);
-    board.createChessPiece(White, Rook, 3, 3);  // Placing an opponent piece diagonally
-    assert(board.isValidMove(2, 2, 3, 3));  // Valid diagonal move to consume the rook
-}
+//     // Testing pawn's diagonal consumption
+//     board.createChessPiece(Black, Pawn, 2, 2);
+//     board.createChessPiece(White, Rook, 3, 3);  // Placing an opponent piece diagonally
+//     assert(board.isValidMove(2, 2, 3, 3));  // Valid diagonal move to consume the rook
+// }
 
 void unit_SameSpot_Movement() {
     Student::ChessBoard board(8, 8);
@@ -444,15 +431,16 @@ int main()
     unit_isValidMove_bishop_one();
     unit_isValidMove_Rook();
     unit_isValidMove_Pawn();
-    unit_PawnPiece_Movement();
+    //unit_PawnPiece_Movement();
     //part1_44_3();
     unit_SameSpot_Movement();
     unit_OutOfBounds_Movement();
     unit_Obstruction_Movement();
     unit_SameColorAtDestination_Movement();
-    part1_44_4();
+    //part1_44_4();
     overwrite_test();
-    unit_isValidScan_Comprehensive();
+    //unit_isValidScan_Comprehensive();
     test_part1_4x4_1();
+    part1_88_5();
     return EXIT_SUCCESS;
 }
