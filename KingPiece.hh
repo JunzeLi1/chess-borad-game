@@ -19,6 +19,12 @@ namespace Student
         public:
             KingPiece(ChessBoard &board, Color color, int row, int column) 
                 : ChessPiece(board, color, row, column) {}
+            
+            Type getType();
+
+            bool canMoveToLocation(int toRow, int toColumn);
+
+            const char *toString();
 
     };
 }
