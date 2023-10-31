@@ -14,14 +14,21 @@ namespace Student
     bool RookPiece::canMoveToLocation(int toRow, int toColumn){
         int row_moved = toRow - getRow();
         int column_moved = toColumn - getColumn();
-        if(row_moved == 0 && column_moved != 0){
-            return true;
-        }
-        if(column_moved == 0 && row_moved != 0){
-            return true;
+        bool isHorizontalMove = (row_moved == 0 && column_moved != 0);
+        bool isVerticalMove = (column_moved == 0 && row_moved != 0);
+        if(!isHorizontalMove && !isVerticalMove) {
+            return false; // The move is neither horizontal nor vertical
         }
 
-        return false;
+        if(!isPathClear(getRow(), getColumn(), toRow, toColumn)) {
+            return false;
+        }
+
+        if(!check_color(toRow, toColumn, getColor())){
+            return false;
+        }
+
+        return true;
     }
 
     const char *RookPiece::toString(){

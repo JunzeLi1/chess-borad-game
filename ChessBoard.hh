@@ -12,6 +12,7 @@ class ChessPiece;
 
 namespace Student
 {
+    class ChessPiece;
     class ChessBoard
     {
     private:

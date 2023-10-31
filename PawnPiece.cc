@@ -21,6 +21,7 @@ namespace Student
                 if(getBoard().isOpponentPieceAt(toRow, toColumn, getColor())){
                     return true;
                 }
+                return false;
             }
         }
         if(getColor() == White){
@@ -28,17 +29,23 @@ namespace Student
                 && getBoard().getPiece(toRow, toColumn) == nullptr){
                 return true;
             }
-            if(column_moved == 0 && (row_moved == -2 || row_moved == -1) && getRow() == board_rows - 2
+            if(column_moved == 0 && row_moved == -2 && getRow() == board_rows - 2
                 && getBoard().getPiece(toRow, toColumn) == nullptr){
-                return true;
-            }
+                if(isPathClear(getRow(), getColumn(), toRow, toColumn)) {
+                    return true;
+                }
+                return false; // Added this to ensure that the pawn can't jump over pieces
+           }
         }
 
 
         if(getColor() == Black){
-            if(column_moved == 0 && (row_moved == 2 || row_moved == 1) && getRow() == 1
+            if(column_moved == 0 && row_moved == 2 && getRow() == 1
                 && getBoard().getPiece(toRow, toColumn) == nullptr){
-                return true;
+                if(isPathClear(getRow(), getColumn(), toRow, toColumn)) {
+                    return true;
+                }
+                return false; // Added this to ensure that the pawn can't jump over pieces
             }
             if (row_moved == 1 && column_moved == 0
                 && getBoard().getPiece(toRow, toColumn) == nullptr){

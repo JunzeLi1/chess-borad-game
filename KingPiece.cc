@@ -1,4 +1,4 @@
-/*RookPiece.cc*/
+/*KingPiece.cc*/
 #include "KingPiece.hh"
 #include <cmath>
 
@@ -14,18 +14,21 @@ namespace Student
     bool KingPiece::canMoveToLocation(int toRow, int toColumn){
         int row_moved = toRow - getRow();
         int column_moved = toColumn - getColumn();
-        if(row_moved == 0 && column_moved != 0){
-            return true;
-        }
-        if(column_moved == 0 && row_moved != 0){
-            return true;
+
+        if (row_moved > 1 || row_moved < -1 || column_moved > 1 || column_moved < -1) {
+            return false;
         }
 
-        return false;
+        if(getBoard().getPiece(toRow, toColumn)&& getBoard().getPiece(toRow, toColumn)->getColor() == getColor()){
+            return false;
+        }
+
+        return true;
     }
 
+
     const char *KingPiece::toString(){
-        return (getColor() == White) ? "\u2656" : "\u265C";
+        return (getColor() == White) ? "\u2654" : "\u265A";  // Corrected the Unicode for King
     }
 
 }

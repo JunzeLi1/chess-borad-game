@@ -100,6 +100,10 @@ namespace Student
      * A unicode representation of the piece.
      */
     virtual const char *toString() = 0;
+
+    bool isPathClear(int fromRow, int fromColumn, int toRow, int toColumn);
+
+    bool check_color(int toRow, int toColumn, Color curr_color);
   };
 }
 

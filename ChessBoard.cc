@@ -45,6 +45,10 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
             board.at(startRow).at(startColumn) = new BishopPiece(*this, col, startRow, startColumn);
             break;
 
+        case(King):
+            board.at(startRow).at(startColumn) = new KingPiece(*this, col, startRow, startColumn);
+            break;
+
         default:
             break;
     }
@@ -100,28 +104,48 @@ bool ChessBoard::isPathClear(int fromRow, int fromColumn, int toRow, int toColum
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn){
     ChessPiece* curr_piece = getPiece(fromRow, fromColumn);
 
-    if(getPiece(fromRow, fromColumn) == nullptr){
+    // Check if there's a piece at the starting position
+    if(curr_piece == nullptr){
         return false;
     }
 
+    // Check if the move is to the same position
     if(fromColumn == toColumn && fromRow == toRow){
         return false;
     }
 
+    // Check if the move is out of bounds
     if (toRow < 0 || toRow >= numRows || toColumn < 0 || toColumn >= numCols) {
         return false;
     }
 
-    if(!isPathClear(fromRow, fromColumn, toRow, toColumn)){
+    // Check if the move is valid for the specific piece
+    if(!curr_piece->canMoveToLocation(toRow, toColumn)){
         return false;
     }
 
-    ChessPiece* dest_piece = getPiece(toRow, toColumn);
-    if(dest_piece && dest_piece->getColor() == curr_piece->getColor()){
-        return false;
+    // Simulate the move and check if the King is under threat after the move
+    ChessPiece *curr = board.at(toRow).at(toColumn);
+    board.at(toRow).at(toColumn) = board.at(fromRow).at(fromColumn);
+    board.at(fromRow).at(fromColumn) = nullptr;
+    board.at(toRow).at(toColumn)->setPosition(toRow, toColumn);
+    for(int i = 0; i < getNumRows(); i++){
+        for(int j = 0; j < getNumCols(); j++){
+            if(board.at(i).at(j) && board.at(i).at(j)->getType() == Type::King && board.at(i).at(j)->getColor() == board.at(toRow).at(toColumn)->getColor()){
+                if(isPieceUnderThreat(i,j)){
+                    board.at(fromRow).at(fromColumn) = board.at(toRow).at(toColumn);
+                    board.at(fromRow).at(fromColumn)->setPosition(fromRow, fromColumn);  
+                    board.at(toRow).at(toColumn) = curr;
+                    return false;
+                }
+            }
+        }
     }
+    board.at(fromRow).at(fromColumn) = board.at(toRow).at(toColumn);
+    board.at(fromRow).at(fromColumn)->setPosition(fromRow, fromColumn);  
+    board.at(toRow).at(toColumn) = curr;
 
-    return curr_piece->canMoveToLocation(toRow, toColumn);
+    return true;
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn){
@@ -140,20 +164,36 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     return false;
 }
 
-bool ChessBoard::isPieceUnderThreat(int row, int column){
-    ChessPiece *curr_piece = getPiece(row, column);
-    if(curr_piece){
-        for(int r = 0; r < getNumRows(); r++){
-            for(int c = 0; c < getNumCols(); c++){
-                if(isValidMove(r, c, row, column)){
-                    return true;
-                }
+bool ChessBoard::isPieceUnderThreat(int row, int col) {
+    ChessPiece* Piece_Check = getPiece(row, col);
+
+    if (Piece_Check == nullptr) {
+        return false;
+    }
+
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+            ChessPiece* piece = board.at(i).at(j);
+
+            if (piece == nullptr){
+                continue;
+            }
+            if(piece->getColor() == Piece_Check->getColor())
+                continue;
+
+            // Check for opposing King's adjacency
+            if (piece->getType() == Type::King && abs(i - row) <= 1 && abs(j - col) <= 1) {
+                return true;
+            }
+
+            if (piece->canMoveToLocation(row, col)){
+                return true;
             }
         }
-
     }
     return false;
 }
+
 
 std::ostringstream ChessBoard::displayBoard()
 {
